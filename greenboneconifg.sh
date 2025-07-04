@@ -2,64 +2,6 @@
 set -e
 figlet -f slant "GreenBone Configuration"
 
-#Configuring OpenVAS Scanner Redis Data Store
-echo "Configuring OpenVAS Scanner Redis Data Store" | tee -a $LOG
-sudo ldconfig
-
-LOG=/var/log/greenbone.log
-OPENVAS_SCANNER=$(curl -s https://api.github.com/repos/greenbone/openvas-scanner/releases/latest | grep -oP "\"tag_name\": \"\K(.*)(?=\")")
-OPENVAS_SCANNER_VERSION="${OPENVAS_SCANNER#v}"
-sudo cp /opt/gvm/gvm-source/openvas-scanner-${OPENVAS_SCANNER_VERSION}/config/redis-openvas.conf /etc/redis/
-sudo chown redis:redis /etc/redis/redis-openvas.conf
-echo "Path to Redis unix socke : $(sudo grep unixsocket /etc/redis/redis-openvas.conf)" | tee -a $LOG
-echo "db_address = /run/redis-openvas/redis.sock" | sudo tee /etc/openvas/openvas.conf
-echo " Adding GVM user to Redis Group" | tee -a $LOG
-sudo usermod -aG redis gvm
-#Optimize Redis Performance
-echo " Optimizing Redis Performance" | tee -a $LOG
-echo "net.core.somaxconn = 1024" | sudo tee -a /etc/sysctl.conf
-echo 'vm.overcommit_memory = 1' | sudo tee -a /etc/sysctl.conf
-echo "Reloding Systemctl variable" 
-sudo sysctl -p
-
-#To avoid creation of latencies and memory usage issues with Redis, disable Linux Kernel’s support for Transparent Huge Pages (THP)
-echo "To avoid creation of latencies and memory usage issues with Redis, disable Linux Kernel’s support for Transparent Huge Pages (THP)"
-sudo tee /etc/systemd/system/disable_thp.service << 'EOL'
-[Unit]
-Description=Disable Kernel Support for Transparent Huge Pages (THP)
-
-[Service]
-Type=simple
-ExecStart=/bin/sh -c "echo 'never' > /sys/kernel/mm/transparent_hugepage/enabled && echo 'never' > /sys/kernel/mm/transparent_hugepage/defrag"
-
-[Install]
-WantedBy=multi-user.target
-EOL
-sudo systemctl daemon-reload
-sudo systemctl enable --now disable_thp
-sudo systemctl enable --now redis-server@openvas
-#Confrim the status of redis server
-systemctl status redis-server@openvas
-echo "--------------------------------------------------------------------------"
-#Configure Mosquitto MQTT Broker for GVM
-echo "Configure Mosquitto MQTT Broker for GVM" | tee -a $LOG
-echo "mqtt_server_uri = localhost:1883
-table_driven_lsc = yes" | sudo tee -a /etc/openvas/openvas.conf
-sudo systemctl enable --now mosquitto
-systemctl status mosquitto
-sudo ss -antpl | grep :1883
-echo "--------------------------------------------------------------------------"
-#Update GVM Directories Ownership and Permissions
-echo "[21]Update GVM Directories Ownership and Permissions" | tee -a $LOG
-sudo mkdir -p /var/lib/notus /run/gvmd
-sudo chown -R gvm:gvm /var/lib/gvm \
-	/var/lib/openvas \
-	/var/lib/notus \
-	/var/log/gvm \
-	/run/gvmd
-
-echo "--------------------------------------------------------------------------"
-
 #Running OpenVAS Scanner, GSA and GVM services
 echo "Running OpenVAS Scanner, GSA and GVM services" | tee -a  $LOG
 echo "Create Systemd Service unit for OpenVAS OSPD" | tee -a $LOG
