@@ -156,9 +156,6 @@ NOTUS_SCANNER_VERSION="${NOTUS_SCANNER#v}"
 sudo cp /opt/gvm/gvm-source/notus-scanner-${NOTUS_SCANNER_VERSION}/venv/bin/* /usr/local/bin/
 sudo cp -r /opt/gvm/gvm-source/notus-scanner-${NOTUS_SCANNER_VERSION}/venv/lib/python3.12/site-packages/* /usr/local/lib/python3.12/site-packages/
 
-sudo cp /opt/gvm/gvm-source/greenbone-feed-sync/venv/bin/greenbone-feed-sync /usr/local/bin/
-sudo cp -r /opt/gvm/gvm-source/greenbone-feed-sync/venv/lib/python3.12/site-packages/* /usr/local/lib/python3.12/site-packages/
-
 echo "All components built successfully"
 
 echo "--------------------------------------------------------------------------"
@@ -181,5 +178,7 @@ for tool in "${!tools[@]}"; do
   "
 done
 echo "--------------------------------------------------------------------------"
+sudo cp /opt/gvm/gvm-source/greenbone-feed-sync/venv/bin/greenbone-feed-sync /usr/local/bin/
+sudo cp -r /opt/gvm/gvm-source/greenbone-feed-sync/venv/lib/python3.12/site-packages/* /usr/local/lib/python3.12/site-packages/
 
 echo "GreenBone Installtion complete"
