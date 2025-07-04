@@ -1,8 +1,10 @@
 #Need to command for update and net toll installtion 
 #cp brige scripts + LAN ADP settings 
 
-
+echo "updating Ubuntu before Start"
 sudo apt update && sudo apt upgrade
+echo "installation of Net Tools"
+sudo apt install net-tools
 
 # Check if network rule file exists
 usbfile="/etc/udev/rules.d/99-usb-lan.rules" 
