@@ -1,4 +1,7 @@
 #!/bin/bash
+
+
+HI my name is manish
 set -e
 figlet -f slant "Installing BurpSuite Community Edition"
 echo "Checking dependencies…"
