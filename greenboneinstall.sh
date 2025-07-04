@@ -178,7 +178,7 @@ for tool in "${!tools[@]}"; do
   "
 done
 echo "--------------------------------------------------------------------------"
-sudo cp /opt/gvm/gvm-source/greenbone-feed-sync/venv/bin/greenbone-feed-sync /usr/local/bin/
+sudo cp /opt/gvm/gvm-source/greenbone-feed-sync/venv/bin/green* /usr/local/bin/
 sudo cp -r /opt/gvm/gvm-source/greenbone-feed-sync/venv/lib/python3.12/site-packages/* /usr/local/lib/python3.12/site-packages/
 
 echo "GreenBone Installtion complete"
