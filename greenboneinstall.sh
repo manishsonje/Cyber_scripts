@@ -222,7 +222,7 @@ sudo systemctl daemon-reload
 sudo systemctl enable --now disable_thp
 sudo systemctl enable --now redis-server@openvas
 #Confrim the status of redis server
-systemctl status redis-server@openvas
+systemctl --no-pager status redis-server@openvas
 echo "--------------------------------------------------------------------------"
 #Configure Mosquitto MQTT Broker for GVM
 echo "Configure Mosquitto MQTT Broker for GVM" | tee -a $LOG
