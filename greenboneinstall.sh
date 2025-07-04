@@ -229,7 +229,7 @@ echo "Configure Mosquitto MQTT Broker for GVM" | tee -a $LOG
 echo "mqtt_server_uri = localhost:1883
 table_driven_lsc = yes" | sudo tee -a /etc/openvas/openvas.conf
 sudo systemctl enable --now mosquitto
-systemctl status mosquitto
+systemctl --no-pager status mosquitto
 sudo ss -antpl | grep :1883
 echo "--------------------------------------------------------------------------"
 #Update GVM Directories Ownership and Permissions
