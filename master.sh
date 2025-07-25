@@ -86,10 +86,10 @@ while true; do
     read -p "Enter your choice [1-4]: " main_choice
 
     case "$main_choice" in
-        1) run_script_from_list "install tools" "$INSTALL_DIR_TOOLS" ;; | tee -a $LOG
-        2) run_script_from_list "install packages" "$INSTALL_DIR_PACKAGES" ;; | tee -a $LOG
-        3) run_script_from_list "uninstall" "$UNINSTALL_DIR" ;; | tee -a $LOG
-        4) echo "Goodbye!"; exit 0 ;; | tee -a $LOG
+        1) run_script_from_list "install tools" "$INSTALL_DIR_TOOLS" ;; 
+        2) run_script_from_list "install packages" "$INSTALL_DIR_PACKAGES" ;; 
+        3) run_script_from_list "uninstall" "$UNINSTALL_DIR" ;; 
+        4) echo "Goodbye!"; exit 0 ;; 
         *) echo " Invalid choice. Please enter 1–4." ;;
     esac
 done
