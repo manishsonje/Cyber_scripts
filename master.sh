@@ -13,6 +13,32 @@ wget -O $CYBER_SCRIPT $REPO_URL
 unzip $CYBER_SCRIPT -d /tmp/
 cd /tmp/Cyber_scripts-main
 
+echo "-------------------------------------------README ME FIRST-------------------------------------------"
+cat /tmp/Cyber_scripts-main/README.md
+echo "-------------------------------------------README ME FIRST-------------------------------------------"
+echo "Modify LAN settings file according to above steps"
+retry=0
+while true; do
+    read -p "Files Modified? (yes/no): " RESPONSE
+    case "$RESPONSE" in
+        [Yy][Ee][Ss] )
+            echo "[INFO] Continuing with the script..."
+            break
+            ;;
+        [Nn][Oo] )
+            if [ $retry -eq 2 ]; then
+                echo "[WARNING] Setup is incomplete, terminating "
+				exit 1
+            fi
+            retry=$((retry+1))
+            echo "[WARNING] Please modify the LAN settings file before continuing."
+            ;;
+        * )
+            echo "[ERROR] Invalid input. Please type yes or no."
+            ;;
+    esac
+done
+
 #-----------------------------------------------------------------------------------------------------------------------------------------------------
 echo "##########################"
 echo " Run SetupEnvironment.sh  "
@@ -89,7 +115,7 @@ while true; do
         1) run_script_from_list "install tools" "$INSTALL_DIR_TOOLS" ;; 
         2) run_script_from_list "install packages" "$INSTALL_DIR_PACKAGES" ;; 
         3) run_script_from_list "uninstall" "$UNINSTALL_DIR" ;; 
-        4) echo "Goodbye!"; exit 0 ;; 
+        4) echo "[ATTENTION] If you have executed installed tools, it is recommended to reboot."; exit 0 ;; 
         *) echo " Invalid choice. Please enter 1–4." ;;
     esac
 done
