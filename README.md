@@ -10,14 +10,20 @@ You need to update the **Net Rule file** to map the correct network adapter.
  
 - Templates are available at:  
   `/tmp/egen3-setup-tools/cyber_scripts/config`
-  Syntax of declaring a adapter:
-   SUBSYSTEM=="net", ACTION=="add", ATTRS{address}=="MAC Address of Port" NAME="Logical name of port "
-  Example:
-   SUBSYSTEM=="net", ACTION=="add", ATTRS{address}=="00:e0:4c:68:02:c6" NAME="sw_port1"
-  Above Example will,
-  Assigns a custom name ("sw_port1") to a network interface based on its MAC address 00:e0:4c:68:02:c6.
-
+### Declaring a adapter
  
+```
+Syntax:
+SUBSYSTEM=="net", ACTION=="add", ATTRS{address}=="MAC Address of Port" NAME="Logical name of port " 
+Example:
+SUBSYSTEM=="net", ACTION=="add", ATTRS{address}=="00:e0:4c:68:02:c6" NAME="sw_port1"
+Above Example will,
+Assigns a custom name ("sw_port1") to a network interface based on its MAC address 00:e0:4c:68:02:c6.
+
+```
+ 
+---
+
 - Modify the appropriate file based on your adapter type:
   - **USB LAN adapters** → `99-usb-lan.rules`
   - **PCI LAN adapters** → `10-network-custom-names.rules`
