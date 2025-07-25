@@ -4,14 +4,14 @@ set -e
 figlet -f slant "Cyber Tools & Packages"
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------------
-REPO_URL="https://bitbucket.devops.aws.md-man.biz/rest/api/latest/projects/EEEABB/repos/egen3-setup-tools/archive?at=refs%2Fheads%2Fmaso&format=zip" 
-CYBER_SCRIPT="/tmp/egen3-setup-tools.zip"
+REPO_URL="https://github.com/manishsonje/Cyber_scripts/archive/refs/heads/main.zip" 
+CYBER_SCRIPT="/tmp/Cyber_scripts-main.zip"
 LOG="var/log/master.sh"
 # Fetching and extracting files for installation
 echo "Fetching and extracting files for installation" | tee -a $LOG
 wget -O $CYBER_SCRIPT $REPO_URL  
-unzip $CYBER_SCRIPT -d /tmp/egen3-setup-tools
-cd /tmp/egen3-setup-tools/cyber_scripts
+unzip $CYBER_SCRIPT -d /tmp/Cyber_scripts-main
+cd /tmp/Cyber_scripts-main
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------------
 echo "##########################"
