@@ -115,7 +115,7 @@ while true; do
         1) run_script_from_list "install tools" "$INSTALL_DIR_TOOLS" ;; 
         2) run_script_from_list "install packages" "$INSTALL_DIR_PACKAGES" ;; 
         3) run_script_from_list "uninstall" "$UNINSTALL_DIR" ;; 
-        4) echo "[ATTENTION] If you have executed installed tools, it is recommended to reboot."; exit 0 ;; 
+        4) echo "[ATTENTION]: If you have executed installed tools, it is recommended to reboot."; exit 0 ;; 
         *) echo " Invalid choice. Please enter 1–4." ;;
     esac
 done
