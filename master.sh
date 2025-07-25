@@ -6,7 +6,7 @@ figlet -f slant "Cyber Tools & Packages"
 #-----------------------------------------------------------------------------------------------------------------------------------------------------
 REPO_URL="https://github.com/manishsonje/Cyber_scripts/archive/refs/heads/main.zip" 
 CYBER_SCRIPT="/tmp/Cyber_scripts-main.zip"
-LOG="var/log/master.sh"
+LOG="/var/log/master.sh"
 # Fetching and extracting files for installation
 echo "Fetching and extracting files for installation" | tee -a $LOG
 wget -O $CYBER_SCRIPT $REPO_URL  
