@@ -10,7 +10,7 @@ LOG="/var/log/master.sh"
 # Fetching and extracting files for installation
 echo "Fetching and extracting files for installation" | tee -a $LOG
 wget -O $CYBER_SCRIPT $REPO_URL  
-unzip $CYBER_SCRIPT -d /tmp/Cyber_scripts-main
+unzip $CYBER_SCRIPT -d /tmp/
 cd /tmp/Cyber_scripts-main
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------------
